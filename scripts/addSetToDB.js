@@ -46,6 +46,7 @@ function isValidGame(game) {
 
 function main() {
   if (!isValidGame(game)) {
+  	console.log("Invalid game");
   	return;
   }
   MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }, function(err, client) {
