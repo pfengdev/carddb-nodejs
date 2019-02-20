@@ -46,6 +46,7 @@ function isArtifact(game) {
 function downloadImages(cardArr) {
 	cardArr.forEach(function(card) {
 		let cardName = card.card_name.english;
+		let imgName = cardName.replace(' ', '_');
 		let imgUrls = card[LARGE_IMAGE];
 		let card_text = card["card_text"];
 		if (imgUrls && card_text) {
@@ -64,12 +65,12 @@ function downloadImages(cardArr) {
 					        imgData += chunk;
 					    });
 						resp.on('end', () => {
-							let fName = '../../cardimages/' + game + '/' + saveAsLanguage + '/' + cardName + '.png';
+							let fName = '../../cardimages/' + game + '/' + saveAsLanguage + '/' + imgName + '.png';
 							fs.writeFile(fName, imgData, 'binary', function(err){
 					            if (err) {
 					            	throw err
 					            } else {
-						    		console.log('saved image for ' + cardName + ' in ' + saveAsLanguage);
+						    		console.log('saved image for ' + imgName + ' in ' + saveAsLanguage);
 						    	}
 					        });
 						  });
