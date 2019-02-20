@@ -23,7 +23,9 @@ const DELETE_KEYS = ['mini_image', 'large_image', 'ingame_image'];
 const languages = ['english', 'german', 'french', 'italian', 'koreana', 
 				   'spanish', 'schinese', 'tchinese', 'russian', 'japanese',
 				   'brazilian', 'latam'];
+const basePath = 'imgs/';
 const ARTIFACT = 'artifact';
+const IMG_PATH = 'img_path';
 
 let myArgs = process.argv.slice(2);
 
@@ -53,7 +55,7 @@ function main() {
     if(!err) {
       console.log("We are connected");
       var db = client.db(game);
-      collection = db.collection('card');
+      collection = db.collection('cards');
 	  fs.readFile(filePath, function(err, data) {
 		if (err) {
 			throw err;
@@ -103,6 +105,7 @@ function shouldProcessCard(card) {
 function processCard(card) {
 	pruneCard(card);
 	reformatLanguages(card);
+	addImagePath(card);
 }
 
 function pruneCard(card) {
@@ -114,4 +117,9 @@ function pruneCard(card) {
 function reformatLanguages(card) {
 	card.card_name = card.card_name.english;
 	card.card_text = card.card_text.english;
+}
+
+function addImagePath(card) {
+	let imgName = card.card_name.replace(' ', '_');
+	card[IMG_PATH] = basePath + imgName + '.png';
 }

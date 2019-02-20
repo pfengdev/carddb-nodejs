@@ -7,14 +7,14 @@ const Schema = mongoose.Schema;
 //What is item_def???
 //How to include price? It's not really a part of the db, but need to fetch it at some point
 let CardSchema = new Schema({
-	card_id : { type : Number, required : true },
+	card_id : { type : Number },
 	// set_name : { type : [Languages] }
 	// card_name : { type : [Languages] },
 	// card_text : { type : [Languages] },
 	set_name : { type : String },
 	card_name : { type : String },
 	card_text : { type : String },
- 	card_type : { type : String, required : true },
+ 	card_type : { type : String },
  	sub_type : { type : String },
 	illustrator : { type : String },
 	rarity : { type : String },
@@ -29,7 +29,7 @@ let CardSchema = new Schema({
 	gold_cost : { type : Number },
 	charges : { type : Number },
 	is_crosslane : { type : Boolean },
-	references : { type : Array },
+	references : { type : Array }
 });
 
 module.exports = mongoose.model('Card', CardSchema);

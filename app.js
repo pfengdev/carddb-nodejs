@@ -1,4 +1,5 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -15,6 +16,7 @@ const cardRouter = require('./routes/card.route');
 app.use('/cards', cardRouter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static('public'));
 
 let port = 3000;
 app.listen(port, () => {

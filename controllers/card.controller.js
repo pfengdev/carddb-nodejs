@@ -1,6 +1,17 @@
 const Card = require('../models/card.model');
 
-exports.search = function(req, res) {
+const FIELDS = '-_id img_name';
+
+exports.find = function(req, res) {
+	//input validaton?
 	let queryParams = req.query;
-	return queryParams;
+	if (queryParams) {
+		Card.find(queryParams, FIELDS, function(err, cardArr) {
+			if (err) {
+				//Proper error handling?
+				console.log('Error when finding cards: ', err);
+			}
+			res.json(cardArr);
+		});
+	}
 };
